@@ -6,7 +6,12 @@ class Home extends Component {
     posts: []
   }
   componentDidMount(){
-    axios.get('http://127.0.0.1:8000/api/doctor/list/')
+    axios.get('https://mediplus-django.herokuapp.com/doctors/', {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      }
+    })
       .then(res => {
         console.log(res);
         this.setState({
@@ -21,8 +26,8 @@ class Home extends Component {
         return (
           <div className="post card" key={post.id}>
             <div className="card-content">
-              <span className="card-title">{post.title}</span>
-              <p>{post.body}</p>
+              <span className="card-title">{post.first_name}</span>
+              <p>{post.last_name}</p>
             </div>
           </div>
         )
